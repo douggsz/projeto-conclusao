@@ -14,7 +14,7 @@ class Visualizacao extends Model
     //Muitos usuarios podem visualizar
     public function usuario()
     {
-        return $this->hasMany('App\Models\Usuario');
+        return $this->hasMany('App\Models\User');
     }
 
     //Muitos conteudos podem ser visulizados

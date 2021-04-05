@@ -13,19 +13,21 @@
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/input.css') }}">
 </head>
-<body style="background: #191716;font-family: 'Roboto Condensed';color: rgb(211,212,217);">
+<body>
 <nav class="navbar navbar-light navbar-expand-md">
-    <div class="container-fluid"><a class="navbar-brand"
-                                    style="filter: brightness(54%);border-color: rgba(255,255,255,0.9);color: #d3d4d9;font-size: 2em;text-align: justify;font-family: 'Roboto Condensed', sans-serif;">Inicio</a>
+    <div class="container-fluid">
+        <a class="navbar-brand" style="filter: brightness(54%);border-color: rgba(255,255,255,0.9);color: #d3d4d9;
+        font-size: 2em; text-align: justify;font-family: 'Roboto Condensed', sans-serif;"
+        href="{{route('inicio')}}">Inicio</a>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="nav navbar-nav">
                 <li class="nav-item" style="font-size: 1.2em;">
-                    <a class="nav-link" style="color: rgb(211,212,217);">Biblioteca</a>
+                    <a class="nav-link" style="color: rgb(211,212,217);" href="{{route('biblioteca')}}">Biblioteca</a>
                 </li>
             </ul>
         </div>
-        <a style="padding: 0.2em;">Login</a>
-        <a style="padding: 0.2em;">Cadastrar</a>
+        <a class="nav-link texto__correcao" href="{{route('login')}}">Login</a>
+        <a class="nav-link texto__correcao" href="{{route('cadastro')}}">Cadastrar</a>
     </div>
 </nav>
 <div>

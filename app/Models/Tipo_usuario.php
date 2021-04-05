@@ -14,6 +14,6 @@ class Tipo_usuario extends Model
     //Varios usuarios possuem o mesmo tipo
     public function usuario()
     {
-        return $this->belongsToMany('App\Models\Usuario');
+        return $this->belongsToMany('App\Models\User');
     }
 }

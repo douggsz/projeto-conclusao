@@ -1,0 +1,36 @@
+@extends('layout.app')
+@section('titulo', 'Cadastro')
+@section('corpo')
+    <section>
+        <img class="form__foto" src="https://images.pexels.com/photos/2173508/pexels-photo-2173508.jpeg"
+             style="margin-top: -2rem" alt="Ensino digital" height="400px">
+        <div style="text-align: center;">
+            <form method="POST" action="{{route('usuario.novo')}}" enctype="multipart/form-data">
+                @csrf
+                <div class="form__group">
+                    <input type="text" class="form__field" placeholder="Nome" name="nome" id='nome' required/>
+                    <label for="usuario" class="form__label">Nome</label>
+                </div>
+                <div class="form__group">
+                        <input type="text" class="form__field" placeholder="Usuario" name="user" id='user' required/>
+                    <label for="usuario" class="form__label">Usuario</label>
+                </div>
+                <div class="form__group">
+                    <input type="password" class="form__field" placeholder="Senha" name="password" id='password' required/>
+                    <label for="senha" class="form__label">Senha</label>
+                </div>
+                <div class="form__group">
+                    <select class="form__field" name="tipo" id="tipo" required>
+                        <option value="1">Aluno</option>
+                        <option value="2">Professor</option>
+                    </select>
+                    <label for="tipo" class="form__label">Tipo</label>
+                </div>
+                <div class="form__group" style="margin-top: 0rem">
+                    <button type="submit">Enviar</button>
+                    <button type="reset">Limpar</button>
+                </div>
+            </form>
+        </div>
+    </section>
+@endsection

@@ -14,7 +14,7 @@ class Conteudo extends Model
     //Cada conteudo pertence a um usuario
     public function usuario()
     {
-        return $this->belongsTo('App\Models\Usuario');
+        return $this->belongsTo('App\Models\User');
     }
 
     //Conteudo possui uma categoria
