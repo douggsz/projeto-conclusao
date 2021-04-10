@@ -13,7 +13,7 @@ class CreateConteudosTable extends Migration
             $table->string('titulo');
             $table->string('url');
             $table->string('descricao');
-            $table->foreignId('usuario_id');
+            $table->foreignId('user_id');
             $table->foreignId('categoria_id');
             $table->softDeletes();
             $table->timestamps();

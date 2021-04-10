@@ -29,6 +29,11 @@ a:hover {
     color: #0D6CD6;
 }
 
+.texto__erro {
+    font-size: 1rem;
+    color: darkred;
+}
+
 .texto__correcao {
     padding: 1em;
     font-size: 1rem;

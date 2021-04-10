@@ -10,7 +10,7 @@ class CreateVisualizacaosTable extends Migration
     {
         Schema::create('visualizacaos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('usuario_id');
+            $table->foreignId('user_id');
             $table->foreignId('conteudo_id');
             $table->boolean('like')->default(false);
             $table->boolean('dislike')->default(false);

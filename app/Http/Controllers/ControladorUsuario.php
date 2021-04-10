@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conteudo;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Session;
 
 class ControladorUsuario extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('guest');
@@ -21,6 +23,50 @@ class ControladorUsuario extends Controller
     public function index()
     {
 
+    }
+
+    private function tipo($user)
+    {
+        $usuarios = User::all();
+        foreach ($usuarios as $logado) {
+            if ($logado->user === $user) {
+                $usuario_logado_tipo = $logado->tipo_usuario_id;
+            }
+        }
+        return $usuario_logado_tipo;
+    }
+
+    private function nome($user)
+    {
+        $usuarios = User::all();
+        foreach ($usuarios as $logado) {
+            if ($logado->user === $user) {
+                $usuario_logado = $logado->nome;
+            }
+        }
+        return $usuario_logado;
+    }
+
+    private function user($user)
+    {
+        $usuarios = User::all();
+        foreach ($usuarios as $logado) {
+            if ($logado->user === $user) {
+                $usuario_logado = $logado->user;
+            }
+        }
+        return $usuario_logado;
+    }
+
+    private function userID($user)
+    {
+        $usuarios = User::all();
+        foreach ($usuarios as $usuario){
+            if ($usuario.user == $user){
+                return $usuario->id;
+            }
+        }
+        return false;
     }
 
     private function autentificacaoUsuario($user) //recebe o usuario enviado
@@ -69,7 +115,15 @@ class ControladorUsuario extends Controller
             echo '<br />validação 3 concuida - usuario cadasrado';
             if ($this->autenticacaoSenha($credenciais['password'])) { // quarta validação
                 echo '<br />validação 5 concuida - login autorizado';
-                return redirect()->route('biblioteca'); // após login usuario é direcionado à biblioteca
+
+                Session::start();
+                Session::put('user', $this->nome($credenciais['user']));
+                Session::put('tipo', $this->tipo($credenciais['user']));
+                Session::put('username', $this->user($credenciais['user']));
+                Session::save();
+
+                return redirect()->route('biblioteca');
+
             } else {
                 echo '<br />validação 5 não concuida - senha incorreta';
                 return back(); // caso a senha estiver incorreta é direcionado a pagina de login novamente
@@ -80,25 +134,69 @@ class ControladorUsuario extends Controller
         }
     }
 
+    public function logout()
+    {
+        Session::flush();
+        return redirect()->route('biblioteca');
+    }
+
     public function create()
     {
 
     }
 
+    private function messages()
+    {
+        return [
+            'nome.min' => 'Nome muito curto',
+            'nome.max' => 'Nome muito longo',
+            'user.unique' => 'Usuário já cadastrado',
+            'user.min' => 'Nome de usuário muito curto',
+            'user.max' => 'Nome de usuário muito longo',
+            'password.min' => 'Senha muito curta',
+        ];
+    }
+
+    private function rules()
+    {
+        return [
+            'nome' => 'required|min:8|max:80',
+            'user' => 'required|min:2|max:25|unique:users',
+            'password' => 'required|min:8',
+        ];
+    }
+
     public function store(Request $request)
     {
+
+        $request->validate($this->rules(), $this->messages());
+
         $usuario = new User();
-        $usuario->nome = $request->nome;
+        $usuario->nome = strtoupper($request->nome);
         $usuario->user = $request->user;
         $usuario->password = $request->password;
         $usuario->tipo_usuario_id = $request->tipo;
         $usuario->save();
+
+
         return redirect()->route('login');
+
     }
 
-    public function show($id)
+    public function show($user)
     {
-        //
+        if (Session::has('user')) {
+            if (Session::get('tipo') == '3') {
+                $conteudo = Conteudo::all();
+                return view('perfil', compact('conteudo'));
+            } else {
+                $conteudo = Conteudo::all()->where('user_id', '=', $this->userID($user));
+                return view('perfil',compact('conteudo'));
+            }
+
+        } else {
+            return redirect()->route('biblioteca');
+        }
     }
 
     public function edit($id)

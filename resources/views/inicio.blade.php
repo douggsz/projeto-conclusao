@@ -1,5 +1,7 @@
 @extends('layout.app') <!-- Importação do layout blade -->
 @section('titulo', 'Inicio') <!-- Definição do titulo -->
+@component('componentes.navegacao')
+@endcomponent
 @section('corpo')  <!-- Algoritmo da pagina -->
     <div style="text-align: left;">
         <p style="font-size: 1rem; padding: 5rem">
