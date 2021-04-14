@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Conteudo;
 use App\Models\User;
 
@@ -61,8 +62,8 @@ class ControladorUsuario extends Controller
     private function userID($user)
     {
         $usuarios = User::all();
-        foreach ($usuarios as $usuario){
-            if ($usuario.user == $user){
+        foreach ($usuarios as $usuario) {
+            if ($usuario->user == $user) {
                 return $usuario->id;
             }
         }
@@ -120,6 +121,7 @@ class ControladorUsuario extends Controller
                 Session::put('user', $this->nome($credenciais['user']));
                 Session::put('tipo', $this->tipo($credenciais['user']));
                 Session::put('username', $this->user($credenciais['user']));
+                Session::put('userID', $this->userID($credenciais['user']));
                 Session::save();
 
                 return redirect()->route('biblioteca');
@@ -185,15 +187,15 @@ class ControladorUsuario extends Controller
 
     public function show($user)
     {
+        $categorias = Categoria::all();
         if (Session::has('user')) {
             if (Session::get('tipo') == '3') {
-                $conteudo = Conteudo::all();
-                return view('perfil', compact('conteudo'));
+                $conteudos = Conteudo::all();
+                return view('perfil', compact('conteudos'));
             } else {
-                $conteudo = Conteudo::all()->where('user_id', '=', $this->userID($user));
-                return view('perfil',compact('conteudo'));
+                $conteudos = Conteudo::all()->where('user_id', '=', Session::get('userID'));
+                return view('perfil', compact('conteudos'));
             }
-
         } else {
             return redirect()->route('biblioteca');
         }

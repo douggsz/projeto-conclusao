@@ -20,7 +20,7 @@ class Conteudo extends Model
     //Conteudo possui uma categoria
     public function categoria()
     {
-        return $this->hasOne('App\Models\Categoria');
+        return $this->belongsTo('App\Models\Categoria');
     }
 
     //Cada conteudo possui varias visualizaçoes

@@ -25,7 +25,7 @@
             @hasSection('corpo')
                 @yield('corpo')
             @endif
-                <h3 style="margin-top: 10rem; position: fixed;" id="tx__prototipo">Prototipo v120213103</h3>
+                <h3 style="margin-top: 10rem;" id="tx__prototipo">Prototipo v120213103</h3>
         </main>
     </div>
 </div>

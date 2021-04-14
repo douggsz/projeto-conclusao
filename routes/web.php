@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ControladorConteudo;
 use App\Http\Controllers\ControladorUsuario;
 use App\Models\Conteudo;
 use App\Models\User;
@@ -47,7 +48,10 @@ Route::get('/cadastro', function () {
     return view('cadastro');
 })->name('cadastro');
 
+
 Route::get('/usuario/logout', [ControladorUsuario::class, 'logout'])->name('usuario.sair');
 Route::get('/usuario/{user}', [ControladorUsuario::class, 'show'])->name('usario.perfil');
-Route::post('/usuario/novo', [ControladorUsuario::class, 'store'])->name('usuario.novo');
+Route::post('/usuario/novo',  [ControladorUsuario::class, 'store'])->name('usuario.novo');
 Route::post('/usuario/login', [ControladorUsuario::class, 'loginUsuario'])->name('usuario.login');
+Route::post('/conteudo/novo', [ControladorConteudo::class, 'store'])->name('conteudo.novo');
+Route::get('/conteudo/excluir/{id}', [ControladorConteudo::class, 'destroy'])->name('conteudo.excluir');
