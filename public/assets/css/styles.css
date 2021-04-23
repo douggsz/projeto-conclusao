@@ -1,0 +1,70 @@
+:root {
+    --size-bezel: .5rem;
+    --color-light: white;
+    --color-dark: #212121;
+    --color-signal: #0D6CD6;
+
+    --color-background: var(--color-light);
+    --color-text: var(--color-dark);
+    --color-accent: var(--color-signal);
+    --size-radius: 4px;
+
+}
+
+body {
+    background: #191716;
+    font-family: 'Roboto Condensed';
+    color: rgb(211, 212, 217);
+}
+
+a {
+    color: inherit;
+}
+
+a:active {
+    color: #0D6CD6;
+}
+
+a:hover {
+    color: #0D6CD6;
+}
+
+.texto__erro {
+    font-size: 1rem;
+    color: darkred;
+}
+
+.texto__correcao {
+    padding: 1em;
+    font-size: 1rem;
+}
+
+.card__text {
+    font-size: 0.5em;
+    color: #d3d4d9;
+}
+
+.form__foto {
+    position: absolute;
+    opacity: 1;
+    padding: 1rem;
+    margin-top: -5.5rem;
+}
+
+.campo__correcao {
+    margin-top: 5%;
+}
+
+.form__button {
+    margin-top: -5rem;
+}
+
+button {
+    font-size: 1rem;
+    color: currentColor;
+    padding: var(--size-bezel) calc(var(--size-bezel) * 2);
+    background: var(--color-accent);
+    border: none;
+    border-radius: var(--size-radius);
+    font-weight: 900;
+}
